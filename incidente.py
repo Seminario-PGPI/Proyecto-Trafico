@@ -1,4 +1,4 @@
-
+# Clase objeto-valor
 class Incidente:
     def __init__(self,titulo,descripcion,fecha,latitud,longitud,gravedad):
         self.titulo = titulo
