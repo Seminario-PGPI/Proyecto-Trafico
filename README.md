@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Seminario-PGPI/Proyecto-Trafico.svg?branch=master)](https://travis-ci.org/Seminario-PGPI/Proyecto-Trafico)
 # Sistema de Incidencias de trafico
 
 Proyecto del [curso de desarrollo para QA](https://jj.github.io/curso-tdd)
