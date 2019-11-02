@@ -1,4 +1,4 @@
 {
-	"Lenguaje" : "Python"
-	"build" : "invoke"
+	"lenguaje" : "Python"
+	"build" : "tasks.py"
 }
