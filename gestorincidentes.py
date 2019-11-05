@@ -1,4 +1,6 @@
 from incidente import Incidente
+
+import geopy.distance
 """
 Las dos esquinas del recuadro que incluye Granada son:
 Latitud: 37.234947 | Longitud: -3.731565
@@ -20,13 +22,15 @@ class GestorIncidentes(object):
                                           incidente.longitud):
             raise LocationOutOfGranada
         self.incidentes.append(incidente)
+    
+    
 
-    def getIncidente(self, latitud: float, longitud: float) -> list:
+    def getIncidente(self, latitud: float, longitud: float, distance: float) -> list:
         if not self._checkLongitudLatitud(latitud, longitud):
             raise LocationOutOfGranada
         result = []
         for incidente in self.incidentes:
-            if incidente.latitud == latitud and incidente.longitud == longitud:
+            if geopy.distance.distance((incidente.latitud, incidente.longitud), (latitud,longitud)).km <= distance:
                 result.append(incidente)
         return result
 

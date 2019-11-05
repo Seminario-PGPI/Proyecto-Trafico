@@ -2,7 +2,7 @@ import unittest
 
 from gestorincidentes import GestorIncidentes, LocationOutOfGranada
 from incidente import Incidente
-
+import geopy.distance
 
 class MyTestCase(unittest.TestCase):
 
@@ -27,7 +27,7 @@ Incidente.")
     def testAddIncident(self):
         self.gestor_incidentes.addIncidente(self.incidente)
         incidente_added = self.gestor_incidentes.getIncidente(
-            self.incidente.latitud, self.incidente.longitud)
+            self.incidente.latitud, self.incidente.longitud, 5)
         self.assertEqual(incidente_added[0], self.incidente)
 
     def testParamCheckLongitudLatitud(self):
@@ -43,6 +43,29 @@ Incidente.")
         self.assertFalse(
             self.gestor_incidentes._checkLongitudLatitud(36, -3))
 
+    def testDistanceTypeLib(self):
+        coord1 = (0, 0)
+        self.assertIsInstance(
+            geopy.distance.distance(coord1, coord1), 
+            geopy.distance.geodesic,
+            "Error distance is not the correct type")
+
+    def testDistanceInKmLib(self):
+        coord1 = (0, 0)
+        self.assertIsInstance(
+            geopy.distance.distance(coord1, coord1).km, 
+            float,
+            "Error distance in km is not the correct type")
+
+    def testDistanceCalculationLib(self):
+        coord1 = (0, 0)
+        coord2 = (1, 1)
+        expected_distance = 156.89956829134027
+        print (geopy.distance.distance(coord1, coord2).km)
+        self.assertEqual(
+            geopy.distance.distance(coord1, coord2).km, 
+            expected_distance,
+            "Error distance calculation is not the expected value")
 
 if __name__ == '__main__':
     unittest.main()
