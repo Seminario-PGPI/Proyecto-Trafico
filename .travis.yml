@@ -7,6 +7,10 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - pip install coverage
 # command to run tests
 script:
-  - python3 -m unittest discover -s ./tests -p 'test*.py'
+  - python3 run -m unittest discover -s ./tests -p 'test*.py' 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  
