@@ -1,13 +1,15 @@
 import unittest
 
 from gestorincidentes import GestorIncidentes, LocationOutOfGranada
+from sqlitehelper import SQLiteHelper
 from incidente import Incidente
 import geopy.distance
+
 
 class MyTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.gestor_incidentes = GestorIncidentes()
+        self.gestor_incidentes = GestorIncidentes(SQLiteHelper())
         self.incidente = Incidente("Incidente test",
                                    "Descripcion del test",
                                    "2019-10-29 11:00:00",
@@ -46,14 +48,14 @@ Incidente.")
     def testDistanceTypeLib(self):
         coord1 = (0, 0)
         self.assertIsInstance(
-            geopy.distance.distance(coord1, coord1), 
+            geopy.distance.distance(coord1, coord1),
             geopy.distance.geodesic,
             "Error distance is not the correct type")
 
     def testDistanceInKmLib(self):
         coord1 = (0, 0)
         self.assertIsInstance(
-            geopy.distance.distance(coord1, coord1).km, 
+            geopy.distance.distance(coord1, coord1).km,
             float,
             "Error distance in km is not the correct type")
 
@@ -61,11 +63,11 @@ Incidente.")
         coord1 = (0, 0)
         coord2 = (1, 1)
         expected_distance = 156.89956829134027
-        print (geopy.distance.distance(coord1, coord2).km)
         self.assertEqual(
-            geopy.distance.distance(coord1, coord2).km, 
+            geopy.distance.distance(coord1, coord2).km,
             expected_distance,
             "Error distance calculation is not the expected value")
+
 
 if __name__ == '__main__':
     unittest.main()
