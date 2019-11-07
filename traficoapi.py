@@ -13,9 +13,11 @@ class AutoresResource:
 
         resp.media = autores
 
-def create():
-    api = falcon.API()
-    api.add_route('/autores', AutoresResource()
+class traficoapi:
+    def initiate():
+        api = falcon.API()
+        api.add_route('/autores', AutoresResource()
+        return api
 
 
-create()
+api = initiate()
