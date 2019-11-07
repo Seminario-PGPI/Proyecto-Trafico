@@ -14,4 +14,4 @@ class AutoresResource:
         resp.media = autores
 
 api = falcon.API()
-api.add_route('/autores', AutoresResource()
+api.add_route('/autores', AutoresResource())
